@@ -1,0 +1,325 @@
+/* ============================================
+   ParityPath — Candidate Portal Styles
+   ============================================ */
+
+.candidate-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+/* ============ VOICE RECORDER ============ */
+.voice-recorder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-xl) 0;
+}
+
+.waveform-container {
+    width: 100%;
+    height: 120px;
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+#waveform-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.mic-button {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+    color: white;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 24px rgba(108, 60, 225, 0.4);
+}
+.mic-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 32px rgba(108, 60, 225, 0.6);
+}
+.mic-button .material-icons-round { font-size: 32px; z-index: 2; }
+
+.mic-button.recording {
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+    box-shadow: 0 4px 24px rgba(239, 68, 68, 0.4);
+    animation: micPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes micPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.mic-ripple {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    opacity: 0;
+    pointer-events: none;
+}
+.mic-button.recording .mic-ripple {
+    animation: rippleOut 1.5s ease-out infinite;
+}
+
+@keyframes rippleOut {
+    0% {
+        inset: -4px;
+        opacity: 0.6;
+    }
+    100% {
+        inset: -30px;
+        opacity: 0;
+    }
+}
+
+.voice-hint {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    margin-top: var(--space-md);
+}
+.voice-status {
+    color: var(--accent-teal);
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-height: 1.2em;
+    margin-top: var(--space-xs);
+}
+
+/* ============ TRANSCRIPT ============ */
+.transcript-section {
+    margin-top: var(--space-lg);
+}
+.transcript-section h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.transcript-box {
+    min-height: 120px;
+    max-height: 250px;
+    padding: var(--space-lg);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow-y: auto;
+    position: relative;
+}
+.transcript-placeholder {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+.transcript-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+.transcript-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--primary);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursorBlink 0.8s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.transcript-edit {
+    width: 100%;
+    min-height: 120px;
+    padding: var(--space-lg);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-active);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    margin-top: var(--space-sm);
+}
+
+.transcript-actions {
+    margin-top: var(--space-md);
+}
+.transcript-btns {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ============ RESUME PREVIEW ============ */
+.resume-preview {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.resume-header {
+    text-align: center;
+    padding-bottom: var(--space-lg);
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: var(--space-lg);
+}
+.resume-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.resume-section {
+    margin-bottom: var(--space-xl);
+    animation: resumeSectionIn 0.5s ease-out both;
+}
+.resume-section:nth-child(2) { animation-delay: 0.1s; }
+.resume-section:nth-child(3) { animation-delay: 0.2s; }
+.resume-section:nth-child(4) { animation-delay: 0.3s; }
+.resume-section:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes resumeSectionIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resume-section-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.resume-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.resume-summary {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.resume-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.skill-tag {
+    padding: 4px 12px;
+    background: rgba(108, 60, 225, 0.12);
+    border: 1px solid rgba(108, 60, 225, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.resume-experience-item {
+    margin-bottom: var(--space-lg);
+}
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-xs);
+}
+.exp-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.exp-duration {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+.exp-org {
+    font-size: 0.85rem;
+    color: var(--accent-teal);
+    margin-bottom: var(--space-sm);
+}
+.exp-bullets {
+    list-style: none;
+    padding: 0;
+}
+.exp-bullets li {
+    position: relative;
+    padding-left: var(--space-lg);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 4px;
+}
+.exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: var(--primary);
+}
+
+.resume-project-item {
+    margin-bottom: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+.project-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-xs);
+}
+.project-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+.project-impact {
+    font-size: 0.8rem;
+    color: var(--accent-green);
+    font-weight: 500;
+    margin-top: var(--space-xs);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1100px) {
+    .candidate-layout {
+        grid-template-columns: 1fr;
+    }
+}
